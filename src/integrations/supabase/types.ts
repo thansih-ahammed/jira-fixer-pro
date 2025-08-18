@@ -14,7 +14,140 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bugs: {
+        Row: {
+          created_at: string
+          description: string | null
+          error_code: string | null
+          file_path: string | null
+          id: string
+          is_fixed: boolean | null
+          jira_id: string
+          line_number: number | null
+          project_id: string
+          proposed_fix: string | null
+          severity: string | null
+          status: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          error_code?: string | null
+          file_path?: string | null
+          id?: string
+          is_fixed?: boolean | null
+          jira_id: string
+          line_number?: number | null
+          project_id: string
+          proposed_fix?: string | null
+          severity?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          error_code?: string | null
+          file_path?: string | null
+          id?: string
+          is_fixed?: boolean | null
+          jira_id?: string
+          line_number?: number | null
+          project_id?: string
+          proposed_fix?: string | null
+          severity?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bugs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bitbucket_username: string | null
+          created_at: string
+          display_name: string | null
+          github_username: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bitbucket_username?: string | null
+          created_at?: string
+          display_name?: string | null
+          github_username?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bitbucket_username?: string | null
+          created_at?: string
+          display_name?: string | null
+          github_username?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          bitbucket_project_key: string | null
+          branch: string | null
+          created_at: string
+          description: string | null
+          fixed_bugs: number | null
+          id: string
+          jira_project_key: string | null
+          name: string
+          repository_url: string | null
+          total_bugs: number | null
+          updated_at: string
+        }
+        Insert: {
+          bitbucket_project_key?: string | null
+          branch?: string | null
+          created_at?: string
+          description?: string | null
+          fixed_bugs?: number | null
+          id?: string
+          jira_project_key?: string | null
+          name: string
+          repository_url?: string | null
+          total_bugs?: number | null
+          updated_at?: string
+        }
+        Update: {
+          bitbucket_project_key?: string | null
+          branch?: string | null
+          created_at?: string
+          description?: string | null
+          fixed_bugs?: number | null
+          id?: string
+          jira_project_key?: string | null
+          name?: string
+          repository_url?: string | null
+          total_bugs?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
