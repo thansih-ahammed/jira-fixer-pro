@@ -1,12 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { BASE_URL } from "@/integrations/supabase/client";
 import { GitBranch, Bug, Code } from "lucide-react";
 
 interface LoginProps {
   onLogin: () => void;
 }
 
+
+
+
+
+
 const Login = ({ onLogin }: LoginProps) => {
+
+
   return (
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
       <div className="w-full max-w-md">

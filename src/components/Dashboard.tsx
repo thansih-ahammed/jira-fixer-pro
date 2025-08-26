@@ -1,7 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { GitBranch, Bug, Calendar, User, Folder } from "lucide-react";
+import { GitBranch, Bug, Calendar, User, Folder, ArrowLeft } from "lucide-react";
+import { BASE_URL } from "@/integrations/supabase/client";
+import { useEffect } from "react";
 
 interface Project {
   id: string;
@@ -14,9 +16,16 @@ interface Project {
 
 interface DashboardProps {
   onProjectSelect: (projectId: string) => void;
+  handleBack: () => void;
+  handleLogout:()=>void;
+
 }
 
-const Dashboard = ({ onProjectSelect }: DashboardProps) => {
+
+
+
+
+const Dashboard = ({ onProjectSelect, handleBack,handleLogout }: DashboardProps) => {
   const projects: Project[] = [
     {
       id: '1',
@@ -52,6 +61,32 @@ const Dashboard = ({ onProjectSelect }: DashboardProps) => {
     }
   ];
 
+  
+
+
+  const getProjects=()=>{
+    fetch(BASE_URL+'/repositories',{
+      method:'POST'
+    })
+    .then((res)=>res.json())
+    .then((res)=>{
+      console.log('respoffhfhfhf',res);
+      
+    })
+    .catch((err)=>{
+      console.log(err);
+      
+    })
+    
+
+
+  }
+
+
+  useEffect(()=>{
+getProjects()
+  },[])
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'bg-destructive';
@@ -63,7 +98,26 @@ const Dashboard = ({ onProjectSelect }: DashboardProps) => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
+     <div className="bg-gradient-hero border-b border-border">
+        <div className="container mx-auto px-6 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button variant="secondary" onClick={handleBack}>
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Login
+              </Button>
+              <div>
+                <h1 className="text-2xl font-bold text-foreground">E-commerce Frontend</h1>
+                <p className="text-muted-foreground">Project Details & Bug Tracking</p>
+              </div>
+            </div>
+             <Button variant="secondary" onClick={handleLogout}>
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
+          </div>
+        </div>
+      </div>
       <div className="bg-gradient-hero border-b border-border">
         <div className="container mx-auto px-6 py-8">
           <div className="flex items-center justify-between">
